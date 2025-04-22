@@ -1,6 +1,6 @@
 const PDFDocument = require("pdfkit");
 
-const UserModel = require("../models/userModel");
+const UserModel = require("../models/UserModel");
 
 const exportUserPDF = async (req, res)=> {
     try {

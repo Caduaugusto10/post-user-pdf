@@ -1,4 +1,4 @@
-const PostModel = require('../models/postModel');
+const PostModel = require('../models/PostModel');
 
 const getAllPosts = async (req, res) => {
     try {
@@ -32,16 +32,16 @@ const createPost = async (req, res) => {
         
     }
 }
-const editPost = async (req, res) => {
+const updatePost = async (req, res) => {
     try {
         const { title, content } = req.body;
-        const post = await PostModel.editPost(req.params.id, title, content);
+        const post = await PostModel.updatePost(req.params.id, title, content);
         if (!post) {
             return res.status(404).json({ error: 'Post não encontrado.' });
         }
         res.json(post);
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao editar post.' });
+        res.status(500).json({ error: 'Erro ao atualizar post.' });
     }
 }
 const deletePost = async (req, res) => {
@@ -56,4 +56,4 @@ const deletePost = async (req, res) => {
     }
 }
 
-module.exports = { getAllPosts, getById, createPost, editPost, deletePost };
+module.exports = { getAllPosts, getById, createPost, updatePost, deletePost };

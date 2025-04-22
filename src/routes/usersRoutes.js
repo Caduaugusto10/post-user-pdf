@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const UserController = require('../controllers/userControllers.js');
+const userController = require('../controllers/userControllers.js');
 const upload = require("../config/upload.js"); // importe a upload.js
+const apiKeyMiddleware = require('../config/apiKey.js')
 
+router.use(apiKeyMiddleware);
 /**
  * @swagger
  * tags:
@@ -20,7 +22,7 @@ const upload = require("../config/upload.js"); // importe a upload.js
  *       200:
  *         description: Lista de usuarios
  */
-router.get('/', UserController.getAllUsers);
+router.get('/', userController.getAllUsers);
 
 /**
  * @swagger
@@ -40,7 +42,7 @@ router.get('/', UserController.getAllUsers);
  *       404:
  *         description: Usuario não encontrado
  */
-router.get('/:id', UserController.getUserById);
+router.get('/:id', userController.getUserById);
 
 /**
  * @swagger
@@ -66,7 +68,7 @@ router.get('/:id', UserController.getUserById);
  *       201:
  *         description: Usuario criado
  */
-router.post('/', upload.single("photo"), UserController.createUser);
+router.post('/', upload.single("photo"), userController.createUser);
 
 /**
  * @swagger
@@ -84,7 +86,7 @@ router.post('/', upload.single("photo"), UserController.createUser);
  *       200:
  *         description: Usuario deletado
  */
-router.delete('/:id', UserController.deleteUser);
+router.delete('/:id', userController.deleteUser);
 
 /**
  * @swagger
@@ -114,7 +116,7 @@ router.delete('/:id', UserController.deleteUser);
  *         description: Usuario atualizado
  */
 
-router.put('/:id', UserController.updateUser);
+router.put('/:id', userController.updateUser);
 
 
 module.exports = router;
